@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+	<div class="content-section">
+		<div class="media">
+			<img class="rounded-circle account-img" src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}">
+			<div class="media-body">
+				<h2 class="account-heading">{{ user.username }} </h2>
+				<p class="text-secondary">{{ user.email }} </p>
+			</div>
+		</div>
+		<legend class="border-bottom mb-4">Account Info</legend>
+		<!-- DIV FOR GITHUB CHAT STARTS HERE -->
+		<div class="media">
+			<a href="https://www.github.com/{{ user.github_username }}" target="_blank">
+				<img class="img-responsive" src="https://ghchart.rshah.org/{{ user.github_username }}" title="{{ user.username }}'s Github contribution chart">
+			</a>
+		</div>
+		<!-- DIV FOR GITHUB CHAT ENDS HERE -->
+        <!-- IFRAME SECTION STARTS HERE -->
+        <div class="content-section mt-4">
+            <div class="thumbnail-container">
+                <div class="thumbnail">
+                  <iframe name="Website" src="http://www.iamsacha.nl/" width="550" height="550" frameborder="0" scrolling="yes" style="width: 100%;"></iframe>   
+                </div>
+            </div>
+        </div>
+                <!-- IFRAME SECTION STARTS HERE -->
+        
+	</div>
+{% endblock content %}
