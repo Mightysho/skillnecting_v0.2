@@ -61,17 +61,6 @@
           {% endwith %}
           {% block content %}{% endblock %}
         </div>
-        <div class="col-md-4">
-          <div class="content-section">
-            <h3>Jobs Opportunities</h3>
-            <p class='text-muted'>Find your next tech job here.
-              <ul class="list-group">
-                <li class="list-group-item list-group-item-light">Job posting 1</li>
-                <li class="list-group-item list-group-item-light">Job posting 2</li>
-              </ul>
-            </p>
-          </div>
-        </div>
       </div>
     </main>
 
@@ -94,7 +83,7 @@
   <!-- Navbar Right Side -->
   <div class="navbar-nav">
     <a class="nav-item nav-link" href="#">API</a>
-    <a class="nav-item nav-link" href="#">Blog</a>
+    <a class="nav-item nav-link" href="{{ url_for('main.blog') }}">Blog</a>
     <a class="nav-item nav-link" href="#">Careers</a>
     <a class="nav-item nav-link" href="{{ url_for('main.about') }}">About</a>
     <a class="nav-item nav-link" href="#">Contact</a>
