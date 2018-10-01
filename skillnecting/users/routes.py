@@ -1,7 +1,7 @@
-from flask import render_template, url_for, flash, redirect, request, Blueprint
+from flask import render_template, url_for, flash, redirect, request, Blueprint, g
 from flask_login import login_user, current_user, logout_user, login_required
-from skillnecting import db, bcrypt
-from skillnecting.models import User, Post
+from skillnecting import db, bcrypt, github
+from skillnecting.models import User, Post, Technicalskills, GithubUser
 from skillnecting.users.forms import (RegistrationForm, LoginForm, UpdateAccountForm,
                                    RequestResetForm, ResetPasswordForm)
 from skillnecting.users.utils import save_picture, send_reset_email
@@ -30,7 +30,7 @@ def register():
         db.session.commit()
         flash('Your account has been created! You are now able to log in', 'success')
         return redirect(url_for('users.login'))
-    return render_template('register.html', title='Register', form=form)
+    return render_template('sign-up.html', title='Register', form=form)
 
 
 @users.route("/login", methods=['GET', 'POST'])
@@ -55,7 +55,40 @@ def login():
                 url_for('main.home'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
-    return render_template('login.html', title='Login', form=form)
+    return render_template('login-page.html', title='Login', form=form)
+
+
+@users.route('/github_login')
+def github_login():
+    """Function and route to redirect user to git hub to authorize"""
+    return github.authorize()
+
+
+@users.route('/github-callback')
+@github.authorized_handler
+def authorized(oauth_token):
+    next_url = request.args.get('next') or url_for('main.home')
+    if oauth_token is None:
+        flash("Authorization failed.")
+        return redirect(next_url)
+
+    user = GithubUser.query.filter_by(github_access_token=oauth_token).first()
+    if user is None:
+        user = GithubUser(github_access_token=oauth_token)
+        db.session.add(user)
+
+    user.github_access_token = oauth_token
+    db.session.commit()
+    login_user(user, True)
+    return redirect(next_url)
+
+
+@github.access_token_getter
+def token_getter():
+    user = g.user
+    if user is not None:
+        return user.github_access_token
+
 
 
 @users.route("/logout")
@@ -77,12 +110,21 @@ def account():
             current_user.image_file = picture_file
         current_user.username = form.username.data
         current_user.email = form.email.data
+        if form.techskills.data:
+            for items in form.techskills.data:
+                if items not in current_user.techskills:
+                    tech_skill = Technicalskills(name=items)
+                    tech_skill.user.append(current_user)
+        current_user.user_weblink = form.user_weblink.data
         db.session.commit()
+        print(form.data)
         flash('Your account has been updated', 'success')
         return redirect(url_for('users.account'))
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
+        form.techskills.data = current_user.techskills
+        form.user_weblink.data = current_user.user_weblink
     image_file = url_for('static', filename="profile_pics/" + current_user.image_file)
     return render_template('account.html', title="Account", image_file=image_file, form=form)
 

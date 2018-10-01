@@ -12,6 +12,11 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
+skills = db.Table('skills',
+        db.Column('userid', db.Integer, db.ForeignKey('user.id'), primary_key=True),
+        db.Column('techskills_id', db.Integer, db.ForeignKey('technicalskills.id'), primary_key=True))
+
+
 class User(db.Model, UserMixin):
     """ Create User instance for db"""
     id = db.Column(db.Integer, primary_key=True)
@@ -20,8 +25,10 @@ class User(db.Model, UserMixin):
     image_file = db.Column(db.String(20), nullable=False, default='default.png')
     password = db.Column(db.String(60), nullable=False)
     posts = db.relationship('Post', backref='author', lazy=True)
-    github_username = db.Column(db.String(30), unique=True, nullable=False)
-
+    techskills = db.relationship('Technicalskills', secondary=skills, lazy='subquery', backref=db.backref('user', lazy=True))
+    github_username = db.Column(db.String(50), unique=True, nullable=False)
+    github_access_token = db.relationship('GithubUser', backref='user', lazy=True)
+    user_weblink = db.Column(db.String(200), nullable=False, default='http://www.iamsacha.nl/')
     
     def get_reset_token(self, expires_sec=1800):
         """Function to generate timed token for password reset"""
@@ -40,8 +47,9 @@ class User(db.Model, UserMixin):
 
 
     def __repr__(self):
-        return "User '{}', '{}', '{}', '{}' ".format(
-            self.username, self.email, self.image_file, self.github_username)
+        return "User '{}', '{}', '{}', '{}', '{}', '{}', '{}' ".format(
+            self.username, self.email, self.image_file, self.github_username, 
+            self.techskills, self.github_access_token, self.user_weblink)
 
 
 class Post(db.Model):
@@ -54,3 +62,22 @@ class Post(db.Model):
 
     def __repr__(self):
         return "Post {} {}".format(self.title, self.date_posted)
+
+class Technicalskills(db.Model):
+    """DB class for Technical skills"""
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), unique=True, nullable=False)
+
+    def __repr__(self):
+        return "{}".format(self.name)
+
+
+class GithubUser(db.Model, UserMixin):
+    """DB class for storing Github accesstoken temporarily"""
+    id = db.Column(db.Integer, primary_key=True)
+    github_access_token = db.Column(db.String(200), db.ForeignKey('user.id'))
+    #user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    
+
+    def __repr__(self):
+        return "Github User '{}' ".format(self.github_access_token)

@@ -7,6 +7,7 @@
 				<h2 class="account-heading">{{ user.username }} </h2>
 				<a class="mr-2" href="{{ url_for('users.user_posts', username=user.username) }}">My Blog Posts</a>
 				<p class="text-secondary">{{ user.email }} </p>
+				<p class="text-secondary">{{ user.techskills }} </p>
 			</div>
 		</div>
 		<legend class="border-bottom mb-4">Account Info</legend>
@@ -21,11 +22,11 @@
         <div class="content-section mt-4">
             <div class="thumbnail-container">
                 <div class="thumbnail">
-                  <iframe name="Website" src="http://www.iamsacha.nl/" width="550" height="550" frameborder="0" scrolling="yes" style="width: 100%;"></iframe>   
+                  <iframe name="Website" src="{{ user.user_weblink }}" width="550" height="550" frameborder="0" scrolling="yes" style="width: 100%;"></iframe>   
                 </div>
             </div>
         </div>
-                <!-- IFRAME SECTION STARTS HERE -->
+                <!-- IFRAME SECTION ENDS HERE -->
         
 	</div>
 {% endblock content %}

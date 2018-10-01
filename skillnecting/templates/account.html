@@ -56,6 +56,32 @@
             		{% endfor %}
             	{% endif %}
             </div>
+            <div class="form-group">
+                {{ form.techskills.label(class="form-control-label") }}
+                {% if form.techskills.errors %}
+                    {{ form.techskills(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.techskills.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.techskills(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.user_weblink.label(class="form-control-label") }}
+                {% if form.user_weblink.errors %}
+                    {{ form.user_weblink(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.user_weblink.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.user_weblink(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
             </fieldset>
             <div class="form-group">
                 {{ form.submit(class="btn btn-outline-info") }}

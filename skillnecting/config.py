@@ -9,3 +9,5 @@ class Config(object):
 	MAIL_USE_TLS = True
 	MAIL_USERNAME = os.environ.get('EMAIL_USER')
 	MAIL_PASSWORD = os.environ.get('EMAIL_PASS')
+	GITHUB_CLIENT_ID = '24a5c3541e979bfb46d1'
+	GITHUB_CLIENT_SECRET = '9b3d9c350e6a1de6e440b4eb63a3c58734db5fbe'
