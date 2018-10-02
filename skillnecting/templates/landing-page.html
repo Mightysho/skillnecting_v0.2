@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
   <link rel="apple-touch-icon" sizes="76x76" href="../static/assets/img/apple-icon.png">
@@ -23,8 +22,7 @@
       <div class="navbar-translate">
         <a class="navbar-brand" href="/">
           Skillnecting </a>
-      </div>
-      <form class="form-inline ml-auto">
+          <form class="form-inline ml-auto">
           <div class="form-group no-border">
             <input type="text" class="form-control" placeholder="Search">
           </div>
@@ -32,6 +30,13 @@
               <i class="material-icons">search</i>
           </button>
         </form>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
           <li class="dropdown nav-item">
@@ -43,8 +48,8 @@
                <a href="{{ current_user.username }}" class="dropdown-item">
                   <i class="material-icons">perm_identity</i> My Profile
                 </a>
-                <a href="{{ url_for('debugme.debug_me') }}" class="dropdown-item">
-                  <i class="material-icons">bug_report</i> Debug Me
+                <a href="{{ url_for('users.account') }}" class="dropdown-item">
+                  <i class="material-icons">edit</i> Edit Profile
                 </a>
                 <a href="{{ url_for('posts.new_post') }}" class="dropdown-item">
                   <i class="material-icons">message</i> New Post
@@ -89,7 +94,7 @@
       <div class="row">
         <div class="col-md-6">
           <h1 class="title">SKILLS+NETWORKING</h1>
-          <h3>Take some Github, add in a litte LinkedIn and stir in some Codepen with a dash of medium, out comes SKILLNECTING</h3>
+          <h3>Take some Github, add in a litte LinkedIn and stir in some Codepen with a dash of Medium and out comes SKILLNECTING</h3>
           <br>
         </div>
       </div>
@@ -223,21 +228,14 @@
       </div>
     </div>
   </div>
-  <footer class="footer footer-default">
+  <footer class="footer footer-default te">
     <div class="container">
-      <nav class="float-left">
-        <ul>
-          <li>
-            <a href="{{ url_for('main.blog') }}">Blog</a>
-          </li>
-        </ul>
-      </nav>
-      <div class="copyright float-right">
+      <div class="copyright text-center">
         &copy;
         <script>
           document.write(new Date().getFullYear())
-        </script>, made with <i class="material-icons">favorite</i> by
-        <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
+        </script>, made with <i class="material-icons">favorite</i> by Flourishcodes using Bootstraps from
+        <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>
       </div>
     </div>
   </footer>

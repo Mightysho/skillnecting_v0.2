@@ -46,9 +46,10 @@ class LoginForm(FlaskForm):
 
 class UpdateAccountForm(FlaskForm):
     """ Class for Updating User details"""
-    choices = [('Python', 'Python'), ('Java', 'Java'), ('JavaScript', 'JavaScript'), ('HTML', 'HTML'), ('CSS', 'CSS'), 
-    ('TypeScript', 'TypeScript'), ('Go', 'Go'), ('C#', 'C#'), ('C++', 'C++'), ('PHP', 'PHP'), ('C', 'C'), ('Assembly', 'Assembly'), 
-    ('R', 'R')]
+    choices = [('amazonwebservices', 'Amazon Web Services'), ('android', 'Android'), ('angularjs', 'Angularjs'), 
+    ('bootstrap', 'Bootstrap'), ('python', 'Python'), ('java', 'Java'), ('javascript', 'JavaScript'), ('html5', 'HTML'), 
+    ('css3', 'CSS'), ('docker', 'Docker'), ('typeScript', 'TypeScript'), ('go', 'GO'), ('csharp', 'C#'), ('cplusplus', 'C++'), 
+    ('php', 'PHP'), ('c', 'C')]
     username = StringField('Username', validators=[DataRequired(),
                                                    Length(min=2, max=20)])
     email = StringField('Email', validators=[DataRequired(), Email()])

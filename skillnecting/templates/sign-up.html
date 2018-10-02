@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
   <link rel="apple-touch-icon" sizes="76x76" href="../static/assets/img/apple-icon.png">
@@ -20,18 +19,16 @@
 <body class="login-page sidebar-collapse">
   <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
    <div class="container">
-      <div class="navbar-translate">
+     <div class="navbar-translate">
         <a class="navbar-brand" href="/">
           Skillnecting </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+        </button>
       </div>
-      <form class="form-inline ml-auto">
-          <div class="form-group no-border">
-            <input type="text" class="form-control" placeholder="Search">
-          </div>
-          <button type="submit" class="btn btn-white btn-just-icon btn-round">
-              <i class="material-icons">search</i>
-          </button>
-        </form>
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
           <li class="dropdown nav-item">
@@ -40,14 +37,8 @@
             </a>
             <div class="dropdown-menu dropdown-with-icons">
               {% if current_user.is_authenticated %}
-                <a href="{{ url_for('debugme.debug_me') }}" class="dropdown-item">
-                  <i class="material-icons">bug_report</i> Debug Me
-                </a>
                 <a href="{{ url_for('posts.new_post') }}" class="dropdown-item">
                   <i class="material-icons">message</i> New Post
-                </a>
-                <a href="{{ url_for('users.account') }}" class="dropdown-item">
-                  <i class="material-icons">edit</i> Edit Profile
                 </a>
                 <a href="{{ url_for('users.logout') }}" class="dropdown-item">
                   <i class="material-icons">stop</i> Log out

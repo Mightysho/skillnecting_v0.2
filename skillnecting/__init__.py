@@ -33,14 +33,12 @@ def create_app(config_class=Config):
 	from skillnecting.users.routes import users
 	from skillnecting.posts.routes import posts
 	from skillnecting.main.routes import main
-	from skillnecting.debugme.routes import debugme
 	from skillnecting.errors.handlers import errors
 
 
 	app.register_blueprint(users)
 	app.register_blueprint(posts)
 	app.register_blueprint(main)
-	app.register_blueprint(debugme)
 	app.register_blueprint(errors)
 
 	return app

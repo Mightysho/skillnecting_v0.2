@@ -112,9 +112,7 @@ def account():
         current_user.email = form.email.data
         if form.techskills.data:
             for items in form.techskills.data:
-                if items not in current_user.techskills:
-                    tech_skill = Technicalskills(name=items)
-                    tech_skill.user.append(current_user)
+                tech_skill = Technicalskills(name=items, user=current_user)
         current_user.user_weblink = form.user_weblink.data
         db.session.commit()
         print(form.data)
@@ -126,7 +124,7 @@ def account():
         form.techskills.data = current_user.techskills
         form.user_weblink.data = current_user.user_weblink
     image_file = url_for('static', filename="profile_pics/" + current_user.image_file)
-    return render_template('account.html', title="Account", image_file=image_file, form=form)
+    return render_template('profile-update.html', title="Account", image_file=image_file, form=form)
 
 
 @users.route("/<string:username>/posts")
@@ -138,13 +136,24 @@ def user_posts(username):
     return render_template("user_post.html", posts=posts, user=user)
 
 
+@users.route("/<string:username>/delete", methods=['POST'])
+@login_required
+def delete_user(username):
+    """Function to delete post"""
+    user = User.query.filter_by(username=username).first_or_404()
+    db.session.delete(user)
+    db.session.commit()
+    flash('Your Profile has been Deleted!', 'success')
+    return redirect(url_for('main.home'))
+
+
 @users.route("/home/<string:username>")
 @users.route("/<string:username>")
 def user_profile(username):
     """Funtion to return User profile"""
     user = User.query.filter_by(username=username).first_or_404()
     print(user)
-    return render_template("user_profile.html", user=user)
+    return render_template("profile-page.html", user=user)
 
 
 @users.route("/reset_password", methods=['GET', 'POST'])
@@ -177,3 +186,5 @@ def reset_token(token):
         flash('Your Password has been updated! You are now able to log in', 'success')
         return redirect(url_for('users.login'))
     return render_template("reset_token.html", title="Reset Password", form=form)
+
+
