@@ -24,9 +24,11 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), unique=True, nullable=False)
     image_file = db.Column(db.String(20), nullable=False, default='default.png')
     password = db.Column(db.String(60), nullable=False)
+    user_designation = db.Column(db.String(50), nullable=False, default='engineer')
+    short_description = db.Column(db.Text, nullable=False, default='I love writing codes and building stuff')
     posts = db.relationship('Post', backref='author', lazy=True)
-    #techskills = db.relationship('Technicalskills', secondary=skills, lazy='subquery', backref=db.backref('user', lazy=True))
-    techskills = db.relationship('Technicalskills', backref='user', lazy=True)
+    techskills = db.relationship('Technicalskills', secondary=skills, lazy='subquery', backref=db.backref('user', lazy=True))
+    #techskills = db.relationship('Technicalskills', backref='user', lazy=True)
     github_username = db.Column(db.String(50), unique=True, nullable=False)
     github_access_token = db.relationship('GithubUser', backref='user', lazy=True)
     user_weblink = db.Column(db.String(200), nullable=False, default='http://www.iamsacha.nl/')
@@ -67,8 +69,7 @@ class Post(db.Model):
 class Technicalskills(db.Model):
     """DB class for Technical skills"""
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), unique=True, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    name = db.Column(db.String(50))
 
     def __repr__(self):
         return "{}".format(self.name)

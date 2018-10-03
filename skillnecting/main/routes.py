@@ -1,5 +1,5 @@
 from flask import render_template, request, Blueprint
-from skillnecting.models import Post
+from skillnecting.models import Post, User
 
 main = Blueprint('main', __name__)
 
@@ -7,7 +7,8 @@ main = Blueprint('main', __name__)
 @main.route("/")
 @main.route("/home")
 def home():
-    return render_template("landing-page.html")
+	users = User.query.all()
+	return render_template("landing-page.html", users=users)
 
 @main.route("/blog")
 def blog():

@@ -25,7 +25,8 @@ def register():
             username=form.username.data,
             email=form.email.data,
             password=hashed_password,
-            github_username=form.github_username.data)
+            github_username=form.github_username.data,
+            user_designation = form.user_designation.data)
         db.session.add(user)
         db.session.commit()
         flash('Your account has been created! You are now able to log in', 'success')
@@ -112,8 +113,11 @@ def account():
         current_user.email = form.email.data
         if form.techskills.data:
             for items in form.techskills.data:
-                tech_skill = Technicalskills(name=items, user=current_user)
+                tech_skill = Technicalskills(name=items)
+                tech_skill.user.append(current_user)
         current_user.user_weblink = form.user_weblink.data
+        current_user.user_designation = form.user_designation.data
+        current_user.short_description = form.short_description.data
         db.session.commit()
         print(form.data)
         flash('Your account has been updated', 'success')
@@ -123,8 +127,10 @@ def account():
         form.email.data = current_user.email
         form.techskills.data = current_user.techskills
         form.user_weblink.data = current_user.user_weblink
+        form.user_designation.data = current_user.user_designation
+        form.short_description.data = current_user.short_description
     image_file = url_for('static', filename="profile_pics/" + current_user.image_file)
-    return render_template('profile-update.html', title="Account", image_file=image_file, form=form)
+    return render_template('account.html', title="Account", image_file=image_file, form=form)
 
 
 @users.route("/<string:username>/posts")

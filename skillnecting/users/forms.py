@@ -15,6 +15,7 @@ class RegistrationForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
     github_username = StringField('Github Username', validators=[DataRequired(), Length(min=2, max=20)])
+    user_designation = StringField('User Designation', validators=[DataRequired(), Length(min=2, max=20)])
     submit = SubmitField('Sign Up')
 
     def validate_username(self, username):
@@ -50,12 +51,13 @@ class UpdateAccountForm(FlaskForm):
     ('bootstrap', 'Bootstrap'), ('python', 'Python'), ('java', 'Java'), ('javascript', 'JavaScript'), ('html5', 'HTML'), 
     ('css3', 'CSS'), ('docker', 'Docker'), ('typeScript', 'TypeScript'), ('go', 'GO'), ('csharp', 'C#'), ('cplusplus', 'C++'), 
     ('php', 'PHP'), ('c', 'C')]
-    username = StringField('Username', validators=[DataRequired(),
-                                                   Length(min=2, max=20)])
+    username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)])
     email = StringField('Email', validators=[DataRequired(), Email()])
     picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
     techskills = SelectMultipleField('Technical Skills', choices=choices, widget=None)
     user_weblink = StringField('Users Weblink', validators=[DataRequired(), Length(min=2, max=200)])
+    user_designation = StringField('Users Designation', validators=[DataRequired(), Length(min=2, max=200)])
+    short_description = StringField('Short Description', validators=[DataRequired(), Length(min=2, max=500)])
     submit = SubmitField('Update')
 
     def validate_username(self, username):
