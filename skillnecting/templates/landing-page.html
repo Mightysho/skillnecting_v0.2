@@ -142,9 +142,12 @@
         </div>
       </div>
       <div class="section text-center">
-      <h2 class="title">Meet the Community</h2>
+      <h2 class="title">Some folks from the Community</h2>
+      <!-- Scroll starts here -->
+      <div class="scrolling-wrapper">
+      <div class="container-fluid">
       <div class="team">
-        <div class="row">
+        <div class="row flex-row flex-nowrap">
           {% for users in users %}
           <a href="{{ url_for('users.user_profile', username=users.username) }}">
           <div class="col-md-4">
@@ -175,6 +178,9 @@
           </div>
         </div>
       </div>
+    </div>
+        <!-- End -->
+      </div>
       <div class="section section-contacts">
         <div class="row">
           <div class="col-md-8 ml-auto mr-auto">
@@ -196,8 +202,7 @@
         &copy;
         <script>
           document.write(new Date().getFullYear())
-        </script>, made with <i class="material-icons">favorite</i> by Flourishcodes using Bootstraps from
-        <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>
+        </script>, made with <i class="material-icons">favorite</i> by Flourishcodes using <a href="https://www.getbootstrap.com" target="_blank">Bootstraps</a> and inspiration from Creative Tim
       </div>
     </div>
   </footer>

@@ -1,5 +1,6 @@
 from flask import render_template, request, Blueprint
 from skillnecting.models import Post, User
+from sqlalchemy import func
 
 main = Blueprint('main', __name__)
 
@@ -7,7 +8,9 @@ main = Blueprint('main', __name__)
 @main.route("/")
 @main.route("/home")
 def home():
-	users = User.query.all()
+	#users = User.query.all()
+	users = User.query.order_by(func.random()).limit(3).all()
+	print(users)
 	return render_template("landing-page.html", users=users)
 
 @main.route("/blog")
