@@ -7,7 +7,7 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flask_github import GitHub
 from skillnecting.config import Config
-
+from flasgger import Swagger
 
 
 db = SQLAlchemy()
@@ -17,6 +17,7 @@ login_manager.login_view = 'users.login'
 login_manager.login_message_category = 'info'
 mail = Mail()
 github = GitHub()
+swagger = Swagger()
 
 
 def create_app(config_class=Config):
@@ -29,16 +30,20 @@ def create_app(config_class=Config):
 	login_manager.init_app(app)
 	mail.init_app(app)
 	github.init_app(app)
+	swagger.init_app(app)
 
 	from skillnecting.users.routes import users
 	from skillnecting.posts.routes import posts
 	from skillnecting.main.routes import main
 	from skillnecting.errors.handlers import errors
+	from skillnecting.api.routes import api
+
 
 
 	app.register_blueprint(users)
 	app.register_blueprint(posts)
 	app.register_blueprint(main)
 	app.register_blueprint(errors)
+	app.register_blueprint(api)
 
 	return app
