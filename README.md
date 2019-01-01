@@ -6,3 +6,5 @@ The application requires Python3.5 and above with a couple of dependencies. Thes
 Create a virtual environment and run ```pip install -r requirements.txt``` so you have a seperate environment for this project.
 
 To start the application, run ```python3 run.py``` from the terminal
+
+### This is still an ongoing project
