@@ -20,7 +20,7 @@ cryptography==2.4.1
 cupshelpers==1.0
 defer==1.0.6
 distro-info==0.18
-Django==2.1.2
+Django==2.1.6
 docutils==0.14
 fabric==2.4.0
 flasgger==0.9.1
@@ -41,7 +41,7 @@ idna==2.7
 invoke==1.2.0
 iotop==0.6
 itsdangerous==0.24
-Jinja2==2.10
+Jinja2==2.10.1
 jmespath==0.9.3
 jsonschema==2.6.0
 keyring==10.6.0
@@ -75,7 +75,6 @@ pyasn1==0.4.4
 pycairo==1.16.2
 pycodestyle==2.4.0
 pycparser==2.19
-pycrypto==2.6.1
 pycryptodome==3.6.6
 pycups==1.9.73
 Pygments==2.2.0
@@ -91,7 +90,7 @@ python-debian==0.1.32
 python-editor==1.0.3
 pytz==2018.5
 pyxdg==0.25
-PyYAML==3.13
+PyYAML==4.2b1
 reportlab==3.4.0
 requests==2.21.0
 requests-oauthlib==1.0.0
@@ -102,7 +101,7 @@ SecretStorage==2.3.1
 sentry-sdk==0.5.4
 simplejson==3.13.2
 six==1.11.0
-SQLAlchemy==1.2.12
+SQLAlchemy==1.3.0
 system-service==0.3
 systemd-python==234
 tabulate==0.8.2
@@ -110,7 +109,7 @@ tweepy==3.3.0
 ubuntu-drivers-common==0.0.0
 ufw==0.35
 unattended-upgrades==0.1
-urllib3==1.23
+urllib3==1.24.2
 usb-creator==0.3.3
 virtualenv==16.0.0
 wadllib==1.3.2
