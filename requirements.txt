@@ -20,7 +20,7 @@ cryptography==2.4.1
 cupshelpers==1.0
 defer==1.0.6
 distro-info==0.18
-Django==2.1.9
+Django==2.1.10
 docutils==0.14
 fabric==2.4.0
 flasgger==0.9.1
